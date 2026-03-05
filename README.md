@@ -1,139 +1,141 @@
-# P2P-File-Sharing-System
-CSC3002F - Networks [Group Project]
+<<<<<<< HEAD
+SOCKET PROGRAMMING PROJECT : P2P FILE SHARING SYSTEM
+=======
+SOCKET PROGRAMMING: P2P FILE SHARING SYSTEM
+>>>>>>> 77a75a66bd728338f7e62276a7b8e739b8c9489f
 
-## 🌐 Mini BitTorrent-Like P2P File Sharing System
-This project implements a simplified torrent-like peer-to-peer (P2P) file sharing system developed using Python sockets.
+This project implements a simplified torrent-like file-sharing system that enables peer-to-peer (P2P) file distribution. It uses TCP for reliable data transfer and UDP for tracker communication and peer discovery. It includes:
 
-The system uses:
-* TCP for reliable file chunk transfer
-* UDP for tracker communication and peer discovery
-  
-It consists of three core components:
-* Tracker – Registers and manages seeders, provides peer discovery for leechers.
-* Seeder – Hosts and shares file chunks with requesting leechers.
-* Leecher – Downloads file chunks in parallel from multiple seeders and reconstructs the file.
+This project develops a basic file-sharing system, similar to torrents, for peer-to-peer (P2P) file distribution. It relies on TCP to ensure reliable data transmission and utilizes UDP for tracker communication and discovering peers. It encompasses: 
 
-## 👥 Team Project
-This system was developed as a group assignment for CSC3002 – Computer Networks.
+ -Tracker: Registers and manages seeders and provides a list of available peers.  
 
-#### Contributors:
-* Sithokomele Nxumalo
-* Banele Magobiyane
-* Athenkosi Miya
+ -Seeder: Shares files with leechers. 
 
-The team collaborated on protocol design, socket implementation, multithreading, hashing, and system testing.
+ -Leecher: Downloads files from seeders.  
 
-## 📦 Prerequisites
-Before running the system, ensure:
-* Python 3.x is installed
-* The requested file exists in the same directory as the source code (for CLI version)
+PREREQUISITES
 
-#### Required Libraries
-* socket
-* threading
-* time
-* os
-* hashlib
-* PyQt5 (for GUI version)
+Ensure the file downloaded by the leecher is stored in the same directory as all the source codes. Have the following installed: 
 
-## 🚀 Running the System
-### 1️⃣ Running the Tracker
-The Tracker:
-* Registers seeders
-* Maintains active peer records
-* Handles leecher requests
-* Removes inactive seeders using a timeout mechanism
+  -Python 3.x 
 
-Steps:
-1. Open a terminal
-2. Navigate to the project directory
-3. Run: python Tracker.py
-The Tracker will begin listening for Seeder and Leecher requests.
+  -Required libraries: 
 
-### 2️⃣ Running a Seeder
-A Seeder:
-* Registers available files with the Tracker
-* Shares file chunks over TCP
-* Sends periodic heartbeat messages to remain discoverable
+  -socket 
 
-Steps:
-1. Open a new terminal window
-2. Navigate to the project directory
-3. Run: python Seeder.py
-4. Enter the file(s) you want to register
-5. The Seeder will:
-* Register with the Tracker
-* Start sending periodic heartbeats
-* Begin accepting Leecher connections
-To run multiple seeders, open multiple terminal windows.
+  -threading 
 
-### 3️⃣ Running a Leecher
-A Leecher:
-* Requests available seeders from the Tracker
-* Downloads file chunks in parallel (multi-threaded)
-* Reconstructs the file
-* Verifies integrity using SHA-256 hashing
-* Automatically transitions into a Seeder after successful download
+  -time  
 
-Steps:
-1. Open another terminal window
-2. Navigate to the project directory
-3. Run: python Leecher.py
-4. Enter the file name to download
-5. The Leecher will:
-* Receive a list of active seeders
-* Download chunks in parallel
-* Reassemble and verify the file
+  -os 
 
-## 🖥️ Running the GUI Version
-This project also includes a PyQt5-based graphical interface.
+  -seeder ( Seeder module) 
 
-To run the GUI: python p2p_gui.py
+  -hashlip 
 
-The GUI provides:
-* Tracker control
-* Seeder control
-* File download interface
-* Real-time status updates
+  -PyQt5 
 
-## 🧠 Key Features
-* UDP-based tracker communication
-* TCP-based reliable file transfer
-* Multi-threaded parallel downloads
-* Heartbeat mechanism for active seeder detection
-* Automatic Leecher → Seeder transition
-* Optional GUI interface
+RUNNING A TRACKER
 
-## 🛠 Troubleshooting
+The Tracker monitors seeders by registering their information and receiving periodic heartbeats to notify the Tracker of their presence. Additionally, it handles requests and provides responses to leechers. 
 
-### 1. Leecher cannot find a Seeder
-* Ensure the Seeder is registered and sending heartbeats
-* Confirm the Tracker is running
-* Verify the file name is correct
+Steps to Start the Tracker: 
 
-### 2. Connection Refused / Timeout
-* Ensure Tracker, Seeder, and Leecher are running
-* Verify correct IP and port configurations
-* Ensure firewall settings allow communication
+ 1. Open a terminal and navigate to the project directory. 
 
-### 3. Seeder not sharing files
-* Confirm the file exists in the Seeder directory
-* Ensure successful registration with Tracker
-* Check heartbeat messages are being sent
+ 2. Run the Tracker script: 
 
-### 4. Multiple Seeders Conflict
-* Ensure each seeder uses a unique port
-* Confirm file sizes are correctly registered
+        python Tracker.py 
 
-### 5. Tracker Not Responding
-* Confirm Tracker is running on correct IP and port
-* Restart Tracker if needed
-* Check firewall settings for UDP blocking
+ 3. The Tracker will now listen for Seeder and Leecher requests. 
 
-## 🔮 Future Enhancements
-* Implement end-to-end encryption
-* Add chunk-level hashing verification
-* Improve error handling and connection recovery
-* Implement bandwidth management
-* Add progress bars and detailed statistics in GUI
+RUNNING A SEEDER
+
+A Seeder shares files with Leechers by registering itself with the Tracker. 
+
+Steps to Start a Seeder: 
+
+ 1.Open a new terminal window. To run multiple seeders simultaneously, open as many terminal windows as the number of seeders you want to operate. 
+
+ 2.Navigate to the project directory. 
+
+ 3.Run the Seeder script  
+
+    python Seeder.py 
+
+ 4.Enter the files you want to register. 
+
+ 5.The Seeder will register itself with the Tracker, send periodic heartbeats and start sharing file. 
+
+RUNNING A LEECHER
+
+A Leecher retrieves files by making requests to available Seeders. Once it successfully downloads the entire file, it transitions into a Seeder, registers its presence with the Tracker, and begins sending periodic heartbeats to indicate its availability. 
+
+Steps to Start a Leecher: 
+
+ 1. Open another terminal window. To run multiple leechers simultaneously, open as many terminal windows as the number of leechers you want to operate. 
+
+ 2. Navigate to the project directory. 
+
+ 3. Run the Leecher script 
+
+        python Leecher.py 
+
+ 4. Enter the file name of the file to be requested from the Tracker and thereafter downloaded from seeders. 
+
+ 5. The Leecher will receive a list of active seeders from the Tracker and attempt to download the requested file. 
+
+TROUBLESHOOTING
+
+1. Leecher cannot find any seeder 
+
+   -Ensure that the seeder had registered with the Tracker and is sending periodic heartbeats. 
+
+   -Check if the Tracker is running. 
+
+   -Ensure that the file name entered is correct and in the correct form. 
+
+ 2. Connection refused or timeouts 
+
+    -Ensure that the Tracker, Seeder and Leecher are running. 
+
+    -Verify that the correct IP and Port numbers are used correctly. 
+
+ 
+3. Seeder is not sharing files properly 
+
+   -Ensure that the Seeder sent a heartbeat message to stay active. 
+
+   -Check if the file exists in the Seeder’s directory. 
+
+   -Ensure that a connection has been established between the Seeder and Leecher. 
+
+ 
+ 4. Multiple seeders conflicts 
+
+   -Ensure each seeder instance is using a unique port number. 
+
+   -Verify that seeders aren't trying to register the same files with different chunk calculations. 
+
+ 
+5. Tracker not responding 
+
+   -Confirm the tracker is running on the specified IP and port. 
+
+   -Check if any firewall settings are blocking UDP communication. 
+
+   -Restart the Tracker if it has been running for an extended period. 
+
+ 
+
+Future Enhancements 
+
+-Implement encryption for secure file transfers. 
+
+-Improve error handling for failed connections. 
+
+-Add bandwidth management to balance internet usage. 
+
+ 
 
